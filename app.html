@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quit Hero - Performance Vaping Cessation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+            background: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .device-frame {
+            width: 375px;
+            height: 812px;
+            background: #1c1c1e;
+            border-radius: 42px;
+            padding: 4px;
+            box-shadow: 
+                0 40px 80px rgba(0,0,0,0.8),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        
+        .screen {
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* iOS Status Bar */
+        .status-bar {
+            height: 47px;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .status-left {
+            font-size: 17px;
+            font-weight: 600;
+        }
+        
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        
+        /* iOS Navigation Header */
+        .nav-header {
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
+            padding: 16px 24px;
+            border-bottom: 0.5px solid rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 99;
+        }
+        
+        .nav-title {
+            color: white;
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        /* Main Content Container */
+        .content-container {
+            background: #000000;
+            flex: 1;
+            padding: 0;
+            overflow-y: auto;
+            position: relative;
+            height: calc(812px - 47px - 66px - 84px);
+        }
+        
+        .view {
+            display: none;
+            min-height: 100%;
+            background: #000000;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+        
+        .view.active {
+            display: block;
+        }
+        
+        /* Home Dashboard */
+        .dashboard-section {
+            padding: 24px;
+        }
+        
+        .stats-card {
+            background: rgba(15,23,42,0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(127,184,229,0.2);
+            border-radius: 20px;
+            padding: 32px 24px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(127,184,229,0.5);
+        }
+        
+        .primary-stat {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .stat-number {
+            font-size: 84px;
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 8px;
+            position: relative;
+            background: linear-gradient(180deg, 
+                #ffffff 0%,
+                #e5e7eb 15%,
+                #d1d5db 30%,
+                #9ca3af 45%,
+                #6b7280 60%,
+                #4b5563 75%,
+                #374151 90%,
+                #1f2937 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 
+                1px 1px 0px #374151,
+                2px 2px 0px #1f2937,
+                3px 3px 0px #111827,
+                4px 4px 8px rgba(0, 0, 0, 0.3);
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+        }
+        
+        .stat-label {
+            color: #94a3b8;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .secondary-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .mini-stat {
+            text-align: center;
+        }
+        
+        .mini-stat-value {
+            color: #7FB8E5;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        
+        .mini-stat-label {
+            color: #64748b;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .status-badge {
+            background: rgba(236,72,153,0.2);
+            border: 1px solid #ec4899;
+            color: #ec4899;
+            padding: 8px 16px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 16px;
+        }
+        
+        /* Tab Bar */
+        .tab-bar {
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
+            border-top: 0.5px solid rgba(255,255,255,0.1);
+            display: flex;
+            height: 84px;
+            padding: 12px;
+            position: relative;
+            z-index: 98;
+        }
+        
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            padding: 8px;
+            border-radius: 12px;
+        }
+        
+        .tab-item.active {
+            color: #ec4899;
+        }
+        
+        .tab-item.active::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32px;
+            height: 2px;
+            background: #ec4899;
+            border-radius: 1px;
+            box-shadow: 0 0 8px rgba(236,72,153,0.5);
+        }
+        
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+            background: currentColor;
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
+        
+        .tab-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Icons */
+        .icon-dashboard { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z'/%3E%3C/svg%3E"); }
+        .icon-calendar { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'/%3E%3C/svg%3E"); }
+        .icon-chat { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z'/%3E%3C/svg%3E"); }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="screen">
+            <!-- iOS Status Bar -->
+            <div class="status-bar">
+                <div class="status-left">9:41</div>
+                <div class="status-right">
+                    <span>●●●●●</span>
+                    <span>100%</span>
+                </div>
+            </div>
+            
+            <!-- iOS Navigation Header -->
+            <div class="nav-header">
+                <h1 class="nav-title">Quit Hero</h1>
+            </div>
+            
+            <!-- Content Container -->
+            <div class="content-container">
+                <!-- Dashboard View -->
+                <div class="view active" id="dashboard">
+                    <div class="dashboard-section">
+                        <!-- Stats Card -->
+                        <div class="stats-card">
+                            <div class="primary-stat">
+                                <div class="stat-number" id="daysClean">389</div>
+                                <div class="stat-label">Days Clean</div>
+                                <div class="status-badge" id="statusBadge">Elite Master Status</div>
+                            </div>
+                            <div class="secondary-stats">
+                                <div class="mini-stat">
+                                    <div class="mini-stat-value" id="moneySaved">$4,850</div>
+                                    <div class="mini-stat-label">Saved</div>
+                                </div>
+                                <div class="mini-stat">
+                                    <div class="mini-stat-value" id="puffsAvoided">31,040</div>
+                                    <div class="mini-stat-label">Puffs Avoided</div>
+                                </div>
+                                <div class="mini-stat">
+                                    <div class="mini-stat-value" id="lungRecovery">98%</div>
+                                    <div class="mini-stat-label">Lung Recovery</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <div class="tab-item active" onclick="showView('dashboard')">
+                    <div class="tab-icon icon-dashboard"></div>
+                    <span class="tab-label">Dashboard</span>
+                </div>
+                <div class="tab-item" onclick="showView('calendar')">
+                    <div class="tab-icon icon-calendar"></div>
+                    <span class="tab-label">Calendar</span>
+                </div>
+                <div class="tab-item" onclick="showView('chat')">
+                    <div class="tab-icon icon-chat"></div>
+                    <span class="tab-label">Coach</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showView(viewId) {
+            // Hide all views
+            const views = document.querySelectorAll('.view');
+            views.forEach(view => view.classList.remove('active'));
+            
+            // Show selected view
+            const targetView = document.getElementById(viewId);
+            if (targetView) {
+                targetView.classList.add('active');
+            }
+            
+            // Update tab states
+            const tabs = document.querySelectorAll('.tab-item');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Find and activate the corresponding tab
+            const tabMap = {
+                'dashboard': 0,
+                'calendar': 1,
+                'chat': 2
+            };
+            
+            const tabIndex = tabMap[viewId];
+            if (tabIndex !== undefined && tabs[tabIndex]) {
+                tabs[tabIndex].classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
