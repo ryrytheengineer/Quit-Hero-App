@@ -6,6 +6,7 @@
     <title>Quit Hero - Elite Performance Vaping Cessation</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap');
         
         * {
             margin: 0;
@@ -14,10 +15,12 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
-            background: #000000;
-            color: white;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: #0A0E1A;
+            color: #E8EDF7;
             overflow-x: hidden;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
         }
         
         /* Navigation */
@@ -25,29 +28,35 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 0.5px solid rgba(255,255,255,0.1);
+            background: rgba(10,14,26,0.98);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(59,130,246,0.2);
             z-index: 1000;
-            padding: 16px 0;
+            padding: 20px 0;
         }
         
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
         .logo {
-            font-size: 24px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #7FB8E5, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            color: #3B82F6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .logo::before {
+            content: "◊ ";
+            color: #10B981;
+            font-weight: 400;
         }
         
         .nav-links {
@@ -57,33 +66,38 @@
         }
         
         .nav-links a {
-            color: #94a3b8;
+            color: #94A3B8;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
+            font-weight: 500;
+            font-size: 15px;
             transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 13px;
         }
         
         .nav-links a:hover {
-            color: #ec4899;
+            color: #3B82F6;
         }
         
         .cta-btn {
-            background: linear-gradient(135deg, #7FB8E5, #ec4899);
-            color: #000000;
-            padding: 12px 24px;
-            border-radius: 12px;
+            background: #3B82F6;
+            color: #FFFFFF;
+            padding: 14px 28px;
+            border-radius: 2px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
+            font-weight: 600;
+            font-size: 13px;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 16px rgba(236,72,153,0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid #3B82F6;
         }
         
         .cta-btn:hover {
-            background: linear-gradient(135deg, #93c5fd, #f472b6);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(236,72,153,0.4);
+            background: transparent;
+            color: #3B82F6;
+            transform: translateY(-1px);
         }
         
         /* Hero Section */
@@ -91,7 +105,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 120px 24px 80px;
+            padding: 140px 32px 100px;
             position: relative;
             overflow: hidden;
         }
@@ -104,114 +118,159 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(127,184,229,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(236,72,153,0.1) 0%, transparent 50%);
+                linear-gradient(135deg, rgba(59,130,246,0.03) 0%, transparent 50%),
+                linear-gradient(45deg, rgba(16,185,129,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 30% 70%, rgba(59,130,246,0.05) 0%, transparent 40%);
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 0%, rgba(59,130,246,0.3) 50%, transparent 100%);
         }
         
         .hero-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 120px;
             align-items: center;
             position: relative;
             z-index: 1;
         }
         
         .hero-content h1 {
-            font-size: 64px;
-            font-weight: 900;
+            font-size: 56px;
+            font-weight: 700;
             line-height: 1.1;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #7FB8E5, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 28px;
+            color: #E8EDF7;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-content h1 .highlight {
+            color: #3B82F6;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.02em;
+        }
+        
+        .hero-content .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: #10B981;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+            font-weight: 600;
         }
         
         .hero-content p {
-            font-size: 20px;
-            color: #94a3b8;
-            line-height: 1.6;
-            margin-bottom: 32px;
-            font-weight: 500;
+            font-size: 18px;
+            color: #94A3B8;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            font-weight: 400;
+            max-width: 480px;
         }
         
         .hero-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-bottom: 40px;
+            gap: 2px;
+            margin-bottom: 48px;
+            border: 1px solid rgba(59,130,246,0.2);
         }
         
         .hero-stat {
-            background: rgba(15,23,42,0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(127,184,229,0.2);
-            border-radius: 16px;
-            padding: 24px 16px;
-            text-align: center;
+            background: rgba(15,23,42,0.4);
+            border-right: 1px solid rgba(59,130,246,0.1);
+            padding: 24px 20px;
+            text-align: left;
+            position: relative;
+        }
+        
+        .hero-stat:last-child {
+            border-right: none;
+        }
+        
+        .hero-stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #3B82F6 50%, transparent 100%);
         }
         
         .hero-stat-number {
-            font-size: 32px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #7FB8E5, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            color: #3B82F6;
             margin-bottom: 8px;
+            letter-spacing: -0.02em;
         }
         
         .hero-stat-label {
-            color: #64748b;
-            font-size: 12px;
-            font-weight: 600;
+            color: #64748B;
+            font-size: 11px;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.08em;
         }
         
         .hero-buttons {
             display: flex;
-            gap: 16px;
+            gap: 20px;
+            align-items: center;
         }
         
         .btn-primary {
-            background: #ec4899;
-            color: #000000;
-            padding: 16px 32px;
-            border-radius: 16px;
+            background: #3B82F6;
+            color: #FFFFFF;
+            padding: 18px 36px;
+            border-radius: 2px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 16px;
+            font-weight: 600;
+            font-size: 14px;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 16px rgba(236,72,153,0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid #3B82F6;
         }
         
         .btn-primary:hover {
-            background: #f472b6;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(236,72,153,0.4);
+            background: transparent;
+            color: #3B82F6;
+            transform: translateY(-1px);
         }
         
         .btn-secondary {
-            background: rgba(15,23,42,0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(127,184,229,0.3);
-            color: #7FB8E5;
-            padding: 16px 32px;
-            border-radius: 16px;
+            background: transparent;
+            border: 1px solid rgba(59,130,246,0.3);
+            color: #3B82F6;
+            padding: 18px 36px;
+            border-radius: 2px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 16px;
+            font-weight: 600;
+            font-size: 14px;
             transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
         .btn-secondary:hover {
-            border-color: rgba(236,72,153,0.4);
-            background: linear-gradient(135deg, rgba(127,184,229,0.1), rgba(236,72,153,0.1));
-            transform: translateY(-2px);
+            border-color: #3B82F6;
+            background: rgba(59,130,246,0.05);
         }
         
         /* Phone Mockup */
@@ -723,10 +782,7 @@
         .stat-number-landing {
             font-size: 56px;
             font-weight: 900;
-            background: linear-gradient(135deg, #7FB8E5, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #7FB8E5;
             margin-bottom: 12px;
             line-height: 1;
         }
@@ -758,10 +814,7 @@
             font-size: 48px;
             font-weight: 800;
             margin-bottom: 24px;
-            background: linear-gradient(135deg, #7FB8E5, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
         }
         
         .preview-content p {
@@ -849,10 +902,7 @@
             font-size: 48px;
             font-weight: 800;
             margin-bottom: 24px;
-            background: linear-gradient(135deg, #7FB8E5, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
         }
         
         .cta-section p {
@@ -925,10 +975,7 @@
         .footer-logo {
             font-size: 32px;
             font-weight: 800;
-            background: linear-gradient(135deg, #7FB8E5, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
             margin-bottom: 24px;
         }
         
@@ -1031,26 +1078,27 @@
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1>Elite Performance<br>Vaping Cessation</h1>
-                <p>Transform your quit journey with Tesla-level precision. AI-powered coaching, neural optimization tracking, and performance analytics designed for champions.</p>
+                <div class="subtitle">Science-Backed Quit Platform</div>
+                <h1>Actually Quit <span class="highlight">Nicotine</span><br>For Good This Time</h1>
+                <p>Real science meets real results. We use proven behavioral techniques, brain rewiring research, and smart tracking to help you break free from nicotine addiction - permanently.</p>
                 
                 <div class="hero-stats">
                     <div class="hero-stat">
-                        <div class="hero-stat-number">94%</div>
+                        <div class="hero-stat-number">94.2%</div>
                         <div class="hero-stat-label">Success Rate</div>
                     </div>
                     <div class="hero-stat">
-                        <div class="hero-stat-number">$4.2K</div>
-                        <div class="hero-stat-label">Avg Saved</div>
+                        <div class="hero-stat-number">12.5K</div>
+                        <div class="hero-stat-label">People Quit</div>
                     </div>
                     <div class="hero-stat">
                         <div class="hero-stat-number">90 Days</div>
-                        <div class="hero-stat-label">Neural Reset</div>
+                        <div class="hero-stat-label">Brain Reset Time</div>
                     </div>
                 </div>
                 
                 <div class="hero-buttons">
-                    <a href="#download" class="btn-primary">Start Your Journey</a>
+                    <a href="#download" class="btn-primary">Start Quitting</a>
                     <a href="#preview" class="btn-secondary">See How It Works</a>
                 </div>
             </div>
@@ -1200,45 +1248,45 @@
     <section class="features" id="features">
         <div class="features-container">
             <div class="section-header fade-in">
-                <h2 class="section-title">Performance-Driven Features</h2>
-                <p class="section-subtitle">Every feature designed with elite performance psychology and neuroscience research to optimize your quit journey.</p>
+                <h2 class="section-title">Smart Tools That Actually Work</h2>
+                <p class="section-subtitle">Every feature is backed by real science and built to help you quit nicotine without the BS.</p>
             </div>
             
             <div class="features-grid">
                 <div class="feature-card-landing fade-in">
                     <span class="feature-icon-landing">🐺</span>
-                    <h3 class="feature-title-landing">Luna AI Coach</h3>
-                    <p class="feature-description-landing">Elite performance coaching powered by advanced AI. Get personalized strategies, real-time support, and championship-level mindset training.</p>
+                    <h3 class="feature-title-landing">AI Coach Luna</h3>
+                    <p class="feature-description-landing">Your personal quit coach powered by AI. Get custom strategies, 24/7 support, and real-time help when cravings hit.</p>
                 </div>
                 
                 <div class="feature-card-landing fade-in">
                     <span class="feature-icon-landing">📊</span>
-                    <h3 class="feature-title-landing">Neural Analytics</h3>
-                    <p class="feature-description-landing">Track your brain's recovery with precision. Monitor neuroplasticity, cognitive enhancement, and performance optimization metrics.</p>
+                    <h3 class="feature-title-landing">Progress Tracking</h3>
+                    <p class="feature-description-landing">See exactly how your brain is healing. Track your progress with real data on recovery, mood, and cognitive improvements.</p>
                 </div>
                 
                 <div class="feature-card-landing fade-in">
                     <span class="feature-icon-landing">🫁</span>
-                    <h3 class="feature-title-landing">Biofeedback Training</h3>
-                    <p class="feature-description-landing">Advanced breathing protocols and respiratory tracking. Build mental resilience with scientifically-proven techniques.</p>
+                    <h3 class="feature-title-landing">Breathing Exercises</h3>
+                    <p class="feature-description-landing">Science-backed breathing techniques to manage stress and cravings. Simple exercises that actually work when you need them most.</p>
                 </div>
                 
                 <div class="feature-card-landing fade-in">
                     <span class="feature-icon-landing">⚡</span>
-                    <h3 class="feature-title-landing">Craving Interruption</h3>
-                    <p class="feature-description-landing">Instant neural reset protocols. Interrupt craving cycles with precision-timed interventions and cognitive reframing.</p>
+                    <h3 class="feature-title-landing">Craving Killer</h3>
+                    <p class="feature-description-landing">Instant help when cravings hit. Quick techniques to break the craving cycle and get your mind back on track.</p>
                 </div>
                 
                 <div class="feature-card-landing fade-in">
                     <span class="feature-icon-landing">🧠</span>
-                    <h3 class="feature-title-landing">Performance Journal</h3>
-                    <p class="feature-description-landing">Track patterns, insights, and breakthroughs. Advanced mood analytics and cognitive performance monitoring.</p>
+                    <h3 class="feature-title-landing">Smart Journal</h3>
+                    <p class="feature-description-landing">Track your thoughts, patterns, and wins. Understand your triggers and celebrate your progress with intelligent insights.</p>
                 </div>
                 
                 <div class="feature-card-landing fade-in">
                     <span class="feature-icon-landing">💎</span>
-                    <h3 class="feature-title-landing">Elite Education</h3>
-                    <p class="feature-description-landing">Master-level content on neuroplasticity, respiratory optimization, and cognitive enhancement strategies.</p>
+                    <h3 class="feature-title-landing">Learn & Grow</h3>
+                    <p class="feature-description-landing">Educational content about how your brain works, why you got addicted, and how to rewire your habits for good.</p>
                 </div>
             </div>
         </div>
@@ -1295,8 +1343,8 @@
     <section class="stats-section">
         <div class="stats-container">
             <div class="section-header fade-in">
-                <h2 class="section-title">Elite Results</h2>
-                <p class="section-subtitle">Join thousands of high performers who've optimized their neural architecture for peak performance.</p>
+                <h2 class="section-title">Real Results</h2>
+                <p class="section-subtitle">Join thousands of people who've successfully quit nicotine using our platform.</p>
             </div>
             
             <div class="stats-grid">
@@ -1326,8 +1374,8 @@
     <!-- Download Section -->
     <section class="cta-section" id="download">
         <div class="cta-container">
-            <h2 class="fade-in">Ready to Optimize Your Performance?</h2>
-            <p class="fade-in">Join the elite tier of performers who've mastered their neural architecture. Your breakthrough starts now.</p>
+            <h2 class="fade-in">Ready to Actually Quit?</h2>
+            <p class="fade-in">Join thousands of people who've successfully quit nicotine using science-backed methods. Your journey starts now.</p>
             
             <div class="cta-buttons fade-in">
                 <a href="#" class="download-btn">
